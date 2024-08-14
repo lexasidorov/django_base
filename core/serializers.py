@@ -44,12 +44,12 @@ class EquipmentSerializer(serializers.ModelSerializer):
 
 
     def update(self, instance, validated_data):
-        category_data = validated_data.pop('category', None)
+        category_data = validated_data.pop('category')
         if category_data:
             category = Category.objects.get_or_create(name=category_data['name'])
             instance.category = category
 
-        stock_data = validated_data.pop('stock', None)
+        stock_data = validated_data.pop('stock')
         if stock_data:
             stock = Stock.objects.get_or_create(name=stock_data['name'], defaults={'address': stock_data['address']})
             instance.stock = stock
