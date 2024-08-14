@@ -4,14 +4,14 @@ from core import views
 
 
 urlpatterns = [
-    path('users/', views.UserList.as_view()),
-    path('users/<int:pk>/', views.UserDetail.as_view()),
-    path('stock/', views.StockList.as_view()),
-    path('stock/<int:pk>/', views.StockDetail.as_view()),
-    path('category/', views.CategoryList.as_view()),
-    path('category/<int:pk>/', views.CategoryDetail.as_view()),
-    path('equipment/', views.EquipmentList.as_view()),
-    path('equipment/<int:pk>/', views.EquipmentDetail.as_view()),
+    path('users/', views.UserList.as_view(), name='users-list'),
+    path('users/<int:pk>/', views.UserDetail.as_view(), name='users-detail'),
+    path('stock/', views.StockList.as_view(), name='stock-list'),
+    path('stock/<int:pk>/', views.StockDetail.as_view(), name='stock-detail'),
+    path('category/', views.CategoryList.as_view(), name='category-list'),
+    path('category/<int:pk>/', views.CategoryDetail.as_view(), name='category-detail'),
+    path('equipment/', views.EquipmentList.as_view(), name='equipment-list'),
+    path('equipment/<int:pk>/', views.EquipmentDetail.as_view(), name='equipment-detail'),
 
 ]
 

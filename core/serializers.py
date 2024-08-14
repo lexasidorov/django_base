@@ -29,10 +29,12 @@ class CategorySerializer(serializers.ModelSerializer):
 
 
 class EquipmentSerializer(serializers.ModelSerializer):
-    category = CategorySerializer(read_only=True)
-    stock = StockSerializer(read_only=True)
-    user = UserSerializer(read_only=True)
-
+    category = CategorySerializer(read_only=False)
+    stock = StockSerializer(read_only=False)
+    user = UserSerializer(read_only=False)
+    # category = serializers.HyperlinkedIdentityField(view_name='category-list')
+    # stock = serializers.HyperlinkedIdentityField(view_name='category-list')
+    # user = serializers.HyperlinkedIdentityField(view_name='category-list')
 
     class Meta:
         model = Equipment
