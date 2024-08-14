@@ -33,30 +33,27 @@ class EquipmentSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         category_data = validated_data.pop('category')
-        category = Category.objects.get_or_create(name=category_data['name'])
+        category, _ = Category.objects.get_or_create(name=category_data['name'])
 
         stock_data = validated_data.pop('stock')
-        stock = Stock.objects.get_or_create(name=stock_data['name'], defaults={'address': stock_data['address']})
+        stock, _ = Stock.objects.get_or_create(name=stock_data['name'], defaults={'address': stock_data['address']})
 
         equipment = Equipment.objects.create(category=category, stock=stock, **validated_data)
-
         return equipment
-
 
     def update(self, instance, validated_data):
         category_data = validated_data.pop('category')
         if category_data:
-            category = Category.objects.get_or_create(name=category_data['name'])
+            category, _ = Category.objects.get_or_create(name=category_data['name'])
             instance.category = category
 
         stock_data = validated_data.pop('stock')
         if stock_data:
-            stock = Stock.objects.get_or_create(name=stock_data['name'], defaults={'address': stock_data['address']})
+            stock, _ = Stock.objects.get_or_create(name=stock_data['name'], defaults={'address': stock_data['address']})
             instance.stock = stock
 
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
 
         instance.save()
-
         return instance
