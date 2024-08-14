@@ -13,6 +13,6 @@ class Category(models.Model):
 
 class Equipment(models.Model):
     name = models.CharField(max_length=50)
-    category = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
-    stock = models.ForeignKey(Stock, on_delete=models.DO_NOTHING)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    category = models.ForeignKey(Category, on_delete=models.DO_NOTHING, null=True)
+    stock = models.ForeignKey(Stock, on_delete=models.DO_NOTHING, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1, null=True)
