@@ -6,7 +6,7 @@ from core.models import Stock, Category, Equipment
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'email', 'is_staff']
+        fields = ['username', 'email', 'is_staff']  # is_staff field's needed for
 
 
 class StockSerializer(serializers.ModelSerializer):
@@ -30,10 +30,11 @@ class EquipmentSerializer(serializers.ModelSerializer):
         model = Equipment
         fields = ['id', 'name', 'category', 'stock', 'user']
 
+    # Override create() and update() are needed for writing in nested fields
 
     def create(self, validated_data):
         category_data = validated_data.pop('category')
-        category, _ = Category.objects.get_or_create(name=category_data['name'])
+        category, _ = Category.objects.get_or_create(name=category_data['name'])  # Creates new if it doesn't exist
 
         stock_data = validated_data.pop('stock')
         stock, _ = Stock.objects.get_or_create(name=stock_data['name'], defaults={'address': stock_data['address']})
@@ -44,7 +45,7 @@ class EquipmentSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         category_data = validated_data.pop('category')
         if category_data:
-            category, _ = Category.objects.get_or_create(name=category_data['name'])
+            category, _ = Category.objects.get_or_create(name=category_data['name'])  # Creates new if it doesn't exist
             instance.category = category
 
         stock_data = validated_data.pop('stock')
@@ -56,4 +57,5 @@ class EquipmentSerializer(serializers.ModelSerializer):
             setattr(instance, attr, value)
 
         instance.save()
+
         return instance
