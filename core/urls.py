@@ -12,6 +12,7 @@ urlpatterns = [
     path('category/<int:pk>/', views.CategoryDetail.as_view(), name='category-detail'),
     path('equipment/', views.EquipmentList.as_view(), name='equipment-list'),
     path('equipment/<int:pk>/', views.EquipmentDetail.as_view(), name='equipment-detail'),
+    path('stock/new', views.stock_list, name='stock-list-new'),
 
 ]
 

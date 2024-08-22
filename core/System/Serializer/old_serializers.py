@@ -3,28 +3,28 @@ from django.contrib.auth.models import User
 from core.models import Stock, Category, Equipment
 
 
-class UserSerializer(serializers.ModelSerializer):
+class oldUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'email', 'is_staff']  # is_staff field's needed for
+        fields = ['username', 'email', 'is_staff']
 
 
-class StockSerializer(serializers.ModelSerializer):
+class oldStockSerializer(serializers.ModelSerializer):
     class Meta:
         model = Stock
         fields = ['id', 'name', 'address']
 
 
-class CategorySerializer(serializers.ModelSerializer):
+class oldCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ['id', 'name']
 
 
-class EquipmentSerializer(serializers.ModelSerializer):
-    category = CategorySerializer(read_only=False)
-    stock = StockSerializer(read_only=False)
-    user = UserSerializer(read_only=True)
+class oldEquipmentSerializer(serializers.ModelSerializer):
+    category = oldCategorySerializer(read_only=False)
+    stock = oldStockSerializer(read_only=False)
+    user = oldUserSerializer(read_only=True)
 
     class Meta:
         model = Equipment
